@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎯 Next.js & Redux Toolkit Task Manager
 
-## Getting Started
+A modern, fully responsive Todo application built with Next.js, Redux Toolkit, and Tailwind CSS. Featuring a dark glassmorphism UI and persistent state management.
 
-First, run the development server:
 
-```bash
+## ✨ Features
+
+- **Advanced State Management:** Utilizes Redux Toolkit for clean, scalable, and centralized state management.
+- **Persistent Storage:** Custom integration with `localStorage` to save tasks and user sessions across browser reloads.
+- **Authentication Simulation:** A sleek login flow with SweetAlert2 modals, saving user identity.
+- **Dynamic Filtering:** View tasks by status (All, Active, Completed) using Redux selectors.
+- **Modern UI/UX:** Crafted with Tailwind CSS featuring dark mode, glassmorphism effects, and smooth transitions.
+- **Type Safety:** 100% written in TypeScript for robust and error-free code.
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **State Management:** Redux Toolkit (`react-redux`)
+- **Styling:** Tailwind CSS
+- **Popups & Alerts:** SweetAlert2
+
+## 🚀 Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+- Node.js installed on your machine
+
+### Installation
+1. Clone the repo
+
+sh
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+
+2. Install NPM packages
+
+sh
+npm install
+
+3. Run the development server
+
+sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💡 Architecture Notes
+This project demonstrates the separation of concerns by keeping the Redux logic (Slices & Store) completely decoupled from the UI components. It also implements safe hydration strategies for Next.js when interacting with browser APIs like `localStorage`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Created with ☕ by VfarzadV
