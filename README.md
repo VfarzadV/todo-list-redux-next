@@ -31,7 +31,7 @@ To get a local copy up and running follow these simple steps.
 1. Clone the repo
 
 sh
-git clone https://github.com/VfarzadV/YOUR-REPO-NAME.git
+git clone https://github.com/VfarzadV/todo-list-redux-next.git
 
 2. Install NPM packages
 
