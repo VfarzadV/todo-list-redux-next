@@ -3,24 +3,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/redux/store';
-import { toggleTodo, deleteTodo, loadSavedTodos, setFilter } from '@/redux/todoSlice';
+import { toggleTodo, deleteTodo, setFilter, fetchTodos, loadSavedTodos } from '@/redux/todoSlice';
 
 export default function TodoList() {
-    const todos = useSelector((state: RootState) => state.todos.items);
-    const currentFilter = useSelector((state: RootState) => state.todos.filter);
+    const { items: todos, filter: currentFilter, status, error } = useSelector((state: RootState) => state.todos);
     const dispatch = useDispatch<AppDispatch>();
-    const isInitialMount = useRef(true);
     const [isClient, setIsClient] = useState(false);
+
+    const isInitialMount = useRef(true);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => setIsClient(true), 0);
+
         if (isInitialMount.current) {
             const savedData = localStorage.getItem('my-todo-list');
-            if (savedData) dispatch(loadSavedTodos(JSON.parse(savedData)));
+            const parsedData = savedData ? JSON.parse(savedData) : [];
+
+            if (parsedData.length > 0) {
+                dispatch(loadSavedTodos(parsedData));
+            } else if (status === 'idle') {
+                dispatch(fetchTodos());
+            }
             isInitialMount.current = false;
         }
+
         return () => clearTimeout(timeoutId);
-    }, [dispatch]);
+    }, [dispatch, status]);
 
     useEffect(() => {
         if (!isInitialMount.current && isClient) {
@@ -29,7 +37,23 @@ export default function TodoList() {
     }, [todos, isClient]);
 
     if (!isClient) {
-        return <div className="text-center py-10 text-slate-500 font-medium animate-pulse">در حال خواندن اطلاعات...</div>;
+        return <div className="text-center py-10 text-slate-500 font-medium animate-pulse">در حال آماده‌سازی...</div>;
+    }
+
+    if (status === 'loading') {
+        return (
+            <div className="text-center py-10 bg-slate-900/30 rounded-2xl border border-dashed border-slate-700">
+                <p className="text-indigo-400 font-medium animate-pulse">در حال دریافت اطلاعات از سرور... ⏳</p>
+            </div>
+        );
+    }
+
+    if (status === 'failed') {
+        return (
+            <div className="text-center py-10 bg-rose-900/20 rounded-2xl border border-rose-800/50">
+                <p className="text-rose-400 font-medium">خطا در ارتباط با سرور: {error} ❌</p>
+            </div>
+        );
     }
 
     const filteredTodos = todos.filter((todo) => {

@@ -57,7 +57,7 @@ describe('TodoList Component', () => {
         };
         (useSelector as unknown as jest.Mock).mockImplementation((callback) => callback(mockState));
         render(<TodoList />);
-        const deleteBtn = await screen.findByTitle('حذف');
+        const deleteBtn = await screen.findByTitle('حذف کردن');
         fireEvent.click(deleteBtn);
         expect(mockDispatch).toHaveBeenCalledWith(deleteTodo('1'));
     });
